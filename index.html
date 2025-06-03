@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Jaringan Komputer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  
+  <style>
+    /* Global Style */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #3a200c;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      background: linear-gradient(45deg, #df7722, #ff8307);
+    }
+
+    /* Background Galaxy Animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, #f9bd39, transparent 40%),
+                  radial-gradient(circle at 70% 70%, #ffff8888, transparent 50%),
+                  radial-gradient(circle at 50% 50%, #fff2affd, transparent 60%),
+                  radial-gradient(circle at 60% 40%, #cb6600, #fff3b7, #ffe373);
+      animation: galaxyMove 25s linear infinite;
+      z-index: -3;
+    }
+
+    @keyframes galaxyMove {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.05) rotate(180deg);
+      }
+      100% {
+        transform: scale(1) rotate(360deg);
+      }
+    }
+
+    /* Kupu-kupu container */
+    .butterflies {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: -2;
+    }
+
+    /* Style for each butterfly */
+    .butterfly {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, #ffc494, #ffffff);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 6px #ffbd8baa);
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      opacity: 0.8;
+      box-shadow:
+        0 0 6px #a75eff88,
+        0 0 10px #fff8;
+      transform-origin: center;
+    }
+
+    /* Kupu-kupu animasi gerak */
+    /* Masing-masing kupu-kupu punya animasi gerak dan kilau berbeda */
+
+    /* Gerak naik turun & ke kanan kiri */
+    @keyframes fly1 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.7; }
+      50% { transform: translate(40px, -20px) scale(1.1) rotate(15deg); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.7; }
+    }
+
+    @keyframes fly2 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.75; }
+      50% { transform: translate(-50px, 30px) scale(1.2) rotate(-10deg); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.75; }
+    }
+
+    @keyframes fly3 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.6; }
+      50% { transform: translate(30px, 40px) scale(1.15) rotate(20deg); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.6; }
+    }
+
+    @keyframes fly4 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.7; }
+      50% { transform: translate(-40px, -40px) scale(1.1) rotate(-15deg); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.7; }
+    }
+
+    @keyframes fly5 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.65; }
+      50% { transform: translate(50px, 20px) scale(1.2) rotate(10deg); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.65; }
+    }
+
+    /* Glow pulse */
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 6px #ffa73388, 0 0 12px rgb(245, 218, 174); }
+      50% { box-shadow: 0 0 14px #ff3f3fcc, 0 0 25px #fffff0; }
+    }
+
+    /* Posisi dan animasi kupu-kupu unik */
+    .butterfly1 {
+      top: 10%;
+      left: 15%;
+      animation: fly1 6s infinite ease-in-out alternate, glowPulse 3s infinite ease-in-out alternate;
+      animation-delay: 0s, 0s;
+    }
+
+    .butterfly2 {
+      top: 30%;
+      left: 75%;
+      animation: fly2 7s infinite ease-in-out alternate, glowPulse 3s infinite ease-in-out alternate;
+      animation-delay: 1s, 0.5s;
+    }
+
+    .butterfly3 {
+      top: 55%;
+      left: 40%;
+      animation: fly3 5.5s infinite ease-in-out alternate, glowPulse 3.5s infinite ease-in-out alternate;
+      animation-delay: 0.7s, 0.2s;
+    }
+
+    .butterfly4 {
+      top: 70%;
+      left: 85%;
+      animation: fly4 6.5s infinite ease-in-out alternate, glowPulse 3s infinite ease-in-out alternate;
+      animation-delay: 0.3s, 1s;
+    }
+
+    .butterfly5 {
+      top: 80%;
+      left: 25%;
+      animation: fly5 8s infinite ease-in-out alternate, glowPulse 3.5s infinite ease-in-out alternate;
+      animation-delay: 0.8s, 0.3s;
+    }
+
+    .butterfly6 {
+  top: 20%;
+  left: 55%;
+  animation: fly1 7.5s infinite ease-in-out alternate, glowPulse 4s infinite ease-in-out alternate;
+  animation-delay: 0.5s, 0.7s;
+}
+
+.butterfly7 {
+  top: 40%;
+  left: 15%;
+  animation: fly2 6.8s infinite ease-in-out alternate, glowPulse 3.8s infinite ease-in-out alternate;
+  animation-delay: 1.2s, 1s;
+}
+
+.butterfly8 {
+  top: 65%;
+  left: 60%;
+  animation: fly3 7.2s infinite ease-in-out alternate, glowPulse 4.2s infinite ease-in-out alternate;
+  animation-delay: 0.4s, 0.4s;
+}
+
+.butterfly9 {
+  top: 75%;
+  left: 10%;
+  animation: fly4 6.3s infinite ease-in-out alternate, glowPulse 3.6s infinite ease-in-out alternate;
+  animation-delay: 0.9s, 0.8s;
+}
+
+.butterfly10 {
+  top: 90%;
+  left: 80%;
+  animation: fly5 8.5s infinite ease-in-out alternate, glowPulse 4.5s infinite ease-in-out alternate;
+  animation-delay: 0.6s, 0.6s;
+}
+
+
+    /* Header */
+    header {
+      padding: 0;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    h1 {
+      color: rgb(158, 8, 8);
+      margin: 0;
+      font-size: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h1 i {
+      color: rgb(255, 132, 38);
+    }
+
+    /* Container for logo and text side by side, centered */
+    .header-row {
+      display: flex;
+      justify-content: flex-start; /* Geser ke kiri */
+      align-items: center;
+      gap: 8px; /* Lebih rapat */
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 10px; /* Tambah padding kiri supaya tidak terlalu menempel di tepi */
+    }
+
+    /* Logo */
+    .logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-right: 0; /* hilangkan jarak kanan */
+    }
+
+    /* Glow frame with white text, purple border, yellow glow */
+    .glow-frame {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 2px solid #ffd500; /* ungu */
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ff9f5f, 0 0 30px #5c3604; /* cahaya kuning jelas */
+      color: #5c3607; /* putih */
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 0;
+      flex-grow: 0; /* biar sesuai ukuran konten */
+      text-align: left;
+    }
+
+    /* Card Style */
+    .card {
+      margin: 20px auto;
+      padding: 20px;
+      background: linear-gradient(45deg, #e66d0a, #ffd325);
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgb(255, 214, 156);
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      text-align: left;
+    }
+
+    .rank {
+      background-color: rgb(255, 255, 180);
+      color: black;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 0 5px rgba(252, 252, 127, 0.8);
+      flex-shrink: 0;
+    }
+
+    .info {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+        <img src="Gambar/KUPU.png" alt="Logo UNTAG" style="width:40px; height:40px; vertical-align: middle; margin-right: 8px;" />
+        TIM 4 SERANGKAI
+    </h1>
+    <div class="header-row">
+      <img src="Gambar/UNTAG.png" alt="Logo UNTAG" class="logo" />
+      <div class="glow-frame">MANAJEMEN JARINGAN KOMPUTER</div>
+    </div>
+  </header>
+
+  <!-- Background butterflies -->
+  <div class="butterflies">
+    <div class="butterfly butterfly1"></div>
+    <div class="butterfly butterfly2"></div>
+    <div class="butterfly butterfly3"></div>
+    <div class="butterfly butterfly4"></div>
+    <div class="butterfly butterfly5"></div>
+    <div class="butterfly butterfly6"></div>
+    <div class="butterfly butterfly7"></div>
+    <div class="butterfly butterfly8"></div>
+    <div class="butterfly butterfly9"></div>
+    <div class="butterfly butterfly10"></div>
+  </div>
+  
+  <div class="card">
+    <div class="rank">1</div>
+    <div class="info">
+      <p>NAMA : Elsa Zahrotus Sania<br>NBI :1462300128</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rank">2</div>
+    <div class="info">
+      <p>NAMA : Siti Clara Baangga Rahawarin<br>NBI :1462300058</p>
+    </div>
+  </div>
+
+  
+  <div class="card">
+    <div class="rank">3</div>
+    <div class="info">
+      <p>NAMA : Kornelia Clorisa Noe<br>NBI :1462300137</p>
+    </div>
+  </div>
+  
+
+  <div class="card">
+    <div class="rank">4</div>
+    <div class="info">
+      <p>NAMA : Fatimatuz Zahroh<br> NBI :1462300148</p>
+    </div>
+  </div>
+</body>
+</html>
